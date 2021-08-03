@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Ritzpa Stock Exchange Market</title>
+	<script src="../../common/jquery-3.6.0.min.js"></script>
+	<script src="../../common/context-path-helper.js"></script>
+	<script src="brokerFeedPage.js"></script>
+	<link rel="stylesheet" href="../../common/bootstrap.min.css">
+	<link rel="stylesheet" href="brokerFeedPage.css">
+	<link rel="stylesheet" href="../../common/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+<div class="container-fluid" style="margin-top: 3px">
+<div id="pageMessages"></div>
+	<div style="width: 100%; display: table;">
+		<div style="display: table-row; height: 100px;">
+			<div style="width: 90%; display: table-cell">
+				<h1>Broker Page</h1>
+				<nav id="forms">
+					<ul>
+						<li><button id="loadXmlButton">Load XML File</button>
+							<ul>
+								<li><form id="LoadXML" enctype="multipart/form-data" action="uploadJquery" method="POST" style="display: none">
+									<label>
+										<input type="file" name="file" accept="text/xml" style= "cursor:pointer"  id="actual-btn">
+									</label>
+									<label>
+										<input type="Submit" value="Upload File" id="uploadFileSubmit" class="buttons" >
+									</label>
+								</form></li>
+							</ul>
+						</li>
+						<li><button id="transferMoneyButton">Transfer Money</button>
+							<ul>
+								<li><form id="TransferMoneyForm" action="transferMoney" method="POST" style="display: none">
+									<label>
+										<input type="number" id="transferMoney" name="transferMoney" min="1" max= "1000000000" placeholder="Enter amount">
+									</label>
+									<label>
+										<input type="Submit" value="Transfer Money" id="transferMoneySubmit" class="buttons" >
+									</label>
+								</form></li>
+							</ul>
+						</li>
+						<li><button id="createCompanyButton">New Company</button>
+							<ul>
+								<li><form id="createCompanyForm" action="createCompany" method="POST" style="display: none">
+									<label>
+										<input type="text" id="stockCompany" name="stockCompany" placeholder="Enter Company Name">
+									</label>
+									<label>
+										<input type="text" id="stockSymbol"  name="stockSymbol" placeholder="Enter Stock Symbol">
+									</label>
+									<label>
+										<input type="number" id="stockQuantity"  name="stockQuantity" min="1" max= "1000000000" placeholder="Enter Quantity">
+									</label>
+									<label>
+										<input type="number" id="stockValue"  name="stockValue" min="1" max= "1000000000" placeholder="Enter Company Value">
+									</label>
+									<label>
+										<input type="Submit" value="Create Company" id="createCompanySubmit" class="buttons" >
+									</label>
+								</form></li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+				<div>
+					<label>Account Balance:</label> <label id="totalUserMoney">0$</label><br>
+					<label>Investment Balance:</label> <label id="investmentMoney">0$</label>
+				</div>
+				<h4>User Actions</h4>
+				<div class="userActions" style="position: relative">
+					<table id="userActions" style="width:100%">
+						<thead>
+						<tr>
+							<th>#</th>
+							<th>Description</th>
+							<th>Timestamp</th>
+							<th>Action Fee</th>
+							<th>Balance Before</th>
+							<th>Balance After</th>
+						</tr>
+						</thead>
+						<tbody id="userActionsBody" >
+						</tbody>
+					</table>
+				</div>
+				<br>
+				<h4>Stock List</h4>
+				<div class="stocks">
+					<table id="stockstable" style="width:100%">
+						<thead>
+						<tr>
+							<th>#</th>
+							<th>Company</th>
+							<th>Symbol</th>
+							<th>Current Value</th>
+							<th>Transaction Cycle</th>
+							<th>Total Transactions</th>
+							<th>Stock Page Link</th>
+						</tr>
+						</thead>
+						<tbody id="stockTablesBody" >
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div style="display: table-cell">
+				<h4>Users Online:</h4>
+				<ul id="userslist"></ul>
+				<h4>Chat</h4>
+				<div id="chatwindow">
+					<!-- place holder to hold all the chat lines -->
+					<div id="chatarea" class="span6"></div>
+					<!-- The actual form through which you send data back to the user -->
+					<form id="chatform" method="POST" action="sendChat">
+						<input type="text" id="userstring" name="userstring"/>
+						<input type="submit" id="sendText" value="Send" class="buttons" />
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

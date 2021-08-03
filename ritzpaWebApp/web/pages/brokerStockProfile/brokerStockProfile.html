@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Ritzpa Stock Exchange Market</title>
+    <script src="../../common/jquery-3.6.0.min.js"></script>
+    <script src="../../common/context-path-helper.js"></script>
+    <script src="brokerStockProfile.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.min.js"></script>
+    <link rel="stylesheet" href="../../common/bootstrap.min.css">
+    <link rel="stylesheet" href="brokerStockProfile.css">
+    <link rel="stylesheet" href="../../common/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+<div class="container-fluid" style="margin-top: 3px">
+    <div id="pageMessages"></div>
+    <div style="width: 100%; display: table;">
+            <div style="display: table-row; height: 100px;">
+                <div style="width: 90%; display: table-cell">
+                    <button id="goBack">Go Back</button>
+                    <h1 id="pageProfile"></h1>
+                    <label id="userAmount"></label>
+                     <div class="transaction">
+                         <button id="commitTrade">Commit Trade</button>
+                        <form class="tradeForm" action="makeOrder" method="POST" id="order" style="display: none">
+                             <label id="directionLabel">Transaction Direction:</label>
+                            <input type="radio" id="buyChoice" name="transactionDirection" value="BUY">
+                            <label for="buyChoice">Buy</label>
+                            <input type="radio" id="sellChoice" name="transactionDirection" value="SELL">
+                            <label for="sellChoice">Sell</label>
+                            <br>
+                             <label id="typeLabel">Transaction Type:</label>
+                            <input type="radio" id="lmtChoice" name="transactionType" value="LMT">
+                            <label for="lmtChoice">LMT</label>
+                            <input type="radio" id="mktChoice" name="transactionType" value="MKT">
+                            <label for="mktChoice">MKT</label>
+                            <input type="radio" id="fokChoice" name="transactionType" value="FOK">
+                            <label for="fokChoice">FOK</label>
+                            <input type="radio" id="iocChoice" name="transactionType" value="IOC">
+                            <label for="iocChoice">IOC</label>
+                            <br>
+                            <label>Amount:</label>
+                            <label class="amountSlider" style='width: 30%'>
+                                <span class="amountSlide"></span>
+                                <input id="amountRange" type="range" min="1" max="1000" name="amount"
+                                       oninput="refreshTransactionTotal()"
+                                >
+                            </label>
+                            <label id="amount">500</label>
+                            <br>
+                            <label id="priceLabel">Value:</label>
+                            <label class="priceSlider" style='width: 30%'>
+                                 <span class="priceSlide"></span>
+                                <input id="priceRange" type="range" min="1" max="1000" name="price"
+                                       oninput="refreshTransactionTotal()">
+                            </label>
+                            <label id="price">500$</label><br>
+                            <label id="transTotal">Transaction total:</label><label id="transactionTotal"></label>
+                            <br><input type="Submit" value="Submit" id="formSubmit" class="buttons">
+                         </form>
+                    </div>
+                    <div class="StockInformation">
+                        <h4>Stock Information:</h4>
+                        <label>Symbol:</label>
+                        <label id="StockInfoSymbol"></label><br>
+                        <label>Company:</label>
+                        <label id="StockInfoCompany"></label><br>
+                        <label>Current Value:</label>
+                        <label id="StockInfoValue"></label><br>
+                        <label>Transaction Cycle:</label>
+                        <label id="StockInfoCycle"></label><br>
+                    </div>
+                    <div class="stockTransactions">
+                        <h4>Transactions Made:</h4>
+                        <table id="transactionsTable" style="width:100%">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>TimeStamp</th>
+                                <th>Amount</th>
+                                <th>Value</th>
+                            </tr>
+                            </thead>
+                            <tbody id="transactionsTableBody" >
+                            </tbody>
+                        </table>
+                    </div><br>
+                        <canvas id="myChart" style="width:100%;max-width:1000px"></canvas>
+                    <script>
+                        var ctx = document.getElementById('myChart').getContext('2d');
+                        var chart = new Chart(ctx, {
+                            type: "line",
+                            data: {
+                                datasets: [{
+                                    fill: true,
+                                    label: "Stock Value",
+                                    backgroundColor: "rgba(0,99,132)",
+                                    borderColor: "rgba(0,99,132)",
+                                    tension: 0.1
+                                }]
+                            },
+                            options: {
+                                legend: {display: false},
+                                responsive: true,
+                                title: {
+                                    display: true,
+                                    text: 'Stock Value'
+                                },
+                                scales: {
+                                    x: {
+                                        display: true,
+                                        title: {
+                                            display: true,
+                                            text: 'Time'
+                                        }
+                                    },
+                                    y: {
+                                        display: true,
+                                        title: {
+                                            display: true,
+                                            text: 'Value ($)'
+                                        }
+                                    }
+                                },
+                                animations: {
+                                    y: {
+                                        easing: 'easeInOutElastic',
+                                        from: (ctx) => {
+                                            if (ctx.type === 'data') {
+                                                if (ctx.mode === 'default' && !ctx.dropped) {
+                                                    ctx.dropped = true;
+                                                    return 0;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+
+                        function updateChart(data, label) {
+                            if (!(chart.data.datasets[0].data.includes(data) && chart.data.labels.includes(label))) {
+                                chart.data.datasets[0].data.push(data);
+                                chart.data.labels.push(label);
+                                chart.update();
+                            }
+                        }
+                    </script>
+                </div>
+                <div style="display: table-cell">
+                    <div>
+                        <h4>Users Online:</h4>
+                        <ul id="userslist"></ul>
+                        <h4>Chat</h4>
+                        <div id="chatwindow">
+                            <!-- place holder to hold all the chat lines -->
+                            <div id="chatarea" class="span6"></div>
+                            <!-- The actual form through which you send data back to the user -->
+                            <form id="chatform" method="POST" action="sendChat">
+                                <input type="text" id="userstring" name="userstring"/>
+                                <input type="submit" value="Send" class="buttons" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+</body>
+</html>

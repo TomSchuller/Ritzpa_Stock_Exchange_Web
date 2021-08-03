@@ -1,0 +1,87 @@
+#chatarea {
+    overflow-y: scroll;
+    max-height: 100px;
+    width: 180px;
+    /*background-color: #F5A962;*/
+    /*color: #DDDDDD;*/
+}
+
+#userstring {
+    background-color: #DDDDDD;
+}
+/*#sendText {*/
+/*    background-color: #F5A962;*/
+/*}*/
+
+button {
+    background-color: #F5A962;
+}
+/*file-upload-button*/
+#actual-btn  {
+    background-color: #F5A962;
+}
+
+.buttons {
+    background-color: #F5A962;
+}
+
+.smiley-image {
+    width: 20px;
+    height: 20px;
+}
+
+#pageMessages {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    width: 30%;
+}
+
+.alert {
+    position: relative;
+}
+
+.alert .close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 1em;
+}
+
+.alert .fa {
+    margin-right:.3em;
+}
+
+body {
+    min-width:820px;
+    background-color: #DDDDDD;
+
+}
+th {
+    background-color: #77b7d9;
+    color: #DDDDDD;
+}
+/*tr {*/
+/*    color: #DDDDDD;*/
+/*}*/
+
+nav{
+    position: relative;
+}
+nav ul{
+    list-style: none;
+    padding-top: 10px;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+#stockValue {
+    width: 199.77px;
+}
+
+#stockQuantity {
+    width: 199.77px;
+}
+

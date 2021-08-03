@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Ritzpa Stock Exchange Market</title>
+
+    <!-- Link the Bootstrap (from twitter) CSS framework in order to use its classes-->
+    <link rel="stylesheet" href="common/bootstrap.min.css">
+    <style>
+        body, html {
+            height: 100%;
+        }
+
+        body {
+            /*.container got the code from https://www.w3schools.com/howto/howto_css_full_page.asp*/
+            /* The image used */
+            /*background-image: url("common/images/wolf_of_wall_street.jpg");*/
+            background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("common/images/wolf_of_wall_street.jpg");
+
+            /* Full height */
+            height: 100%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        img {
+            opacity: 0.5;
+        }
+
+        /*body {*/
+        /*    !*background: url(common/images/wolf_of_wall_street.jpg) no-repeat;*!*/
+        /*    !*background-size: cover;*!*/
+        /*    <img src="common/images/wolf_of_wall_street.jpg"*/
+        /*    style="max-width: 100%;" />*/
+        /*}*/
+    </style>
+</head>
+<body>
+<script>
+    window.test1 = 4;
+</script>
+
+<div class="background_picture">
+
+<div class="container">
+    <h1>Welcome to Ritzpa Stock Exchange Market!</h1>
+    <br/>
+    <h2>Please enter a user name:</h2>
+    <form id="LoadUser" method="GET" action="feedPage">
+        <input type="text" name="username" class="" placeholder="Enter User Name" />
+        <input type="submit" value="Login" />
+        <br><br>
+        <div>
+            <input type="radio" id="adminChoice"
+                   name="choice" value="admin">
+            <label for="adminChoice">Admin</label>
+            <input type="radio" id="brokerChoice"
+                   name="choice" value="broker">
+            <label for="brokerChoice">Broker</label>
+        </div>
+    </form>
+</div>
+</div>
+</body>
+</html>

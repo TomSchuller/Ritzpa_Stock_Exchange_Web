@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Ritzpa Stock Exchange Market</title>
+	<script src="../../common/jquery-3.6.0.min.js"></script>
+	<script src="../../common/context-path-helper.js"></script>
+	<script src="adminFeedPage.js"></script>
+	<link rel="stylesheet" href="../../common/bootstrap.min.css">
+	<link rel="stylesheet" href="adminFeedPage.css">
+</head>
+<body>
+<div class="container-fluid" style="margin-top: 3px">
+		<div style="width: 100%; display: table;">
+			<div style="display: table-row; height: 100px;">
+				<div style="width: 90%; display: table-cell">
+					<h1>Admin Page</h1>
+					<h4>Stock List</h4>
+					<div class="stocks">
+						<table id="stockstable" style="width:100%">
+							<thead>
+							<tr>
+								<th>#</th>
+								<th>Company</th>
+								<th>Symbol</th>
+								<th>Current Value</th>
+								<th>Transaction Cycle</th>
+								<th>Total Transactions</th>
+								<th>Stock Page Link</th>
+							</tr>
+							</thead>
+							<tbody id="stockTablesBody" >
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div style="display: table-cell">
+					<div>
+						<h4>Users Online:</h4>
+						<ul id="userslist"></ul>
+						<h4>Chat</h4>
+						<div id="chatwindow">
+							<!-- place holder to hold all the chat lines -->
+							<div id="chatarea" class="span6"></div>
+							<!-- The actual form through which you send data back to the user -->
+							<form id="chatform" method="POST" action="sendChat">
+								<input type="text" id="userstring" name="userstring" />
+								<input type="submit" value="Send" class="buttons"/>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>
+</body>
+</html>

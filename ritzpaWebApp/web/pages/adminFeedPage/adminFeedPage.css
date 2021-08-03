@@ -1,0 +1,36 @@
+#chatarea {
+    overflow-y: scroll;
+    max-height: 100px;
+    width: 180px;
+}
+
+#pageMessages {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    width: 30%;
+}
+
+.smiley-image {
+    width: 20px;
+    height: 20px;
+}
+
+body {
+    min-width:820px;
+    background-color: #DDDDDD;
+}
+#userstring {
+    background-color: #DDDDDD;
+}
+.buttons {
+    background-color: #F5A962;
+}
+
+th {
+    background-color: #77b7d9;
+    color: #DDDDDD;
+}
+a:hover {
+    cursor: pointer;
+}
